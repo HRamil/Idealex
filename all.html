@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+    // task 1
+    console.log("Task 1")
+    String.prototype.repeatify = String.prototype.repeatify || function(times) {
+        let str = '';
+        for (let i = 0; i < times; i++) {
+        str += this;
+        }
+        return str;
+    };
+
+    console.log("hello".repeatify(3))
+
+    //task 2
+    console.log("Task 2")
+        function  multiply(num1 , num2){
+            if(num2 !=undefined){
+                return console.log(num1*num2)
+            }
+            return function doMultiply(num2){
+                return console.log(num1*num2)
+            }
+        }
+        multiply(4,5);
+        multiply(3,3);
+
+        const double = multiply(2)
+        double(5)
+        double(11)
+
+
+    //task 3
+    console.log("Task 3")
+    function after(count, func) {
+            let times = 0;
+        
+            return function() {
+                times++;
+        
+                if (times == count) {
+                    return func();
+                }
+            };
+        }
+        
+        const called = function() { console.log("hello") };
+        const afterCalled = after(3, called);
+        
+        afterCalled(); 
+        afterCalled();
+        afterCalled();
+
+
+    //task 4
+    console.log("Task 4")
+    let maxProfit = function(price) {
+        let len = price.length
+        let profit = [];
+        for(let i = 0; i < len; i++)
+            profit[i] = 0
+        let max_price = price[len - 1];
+        for(let i = len - 2; i >= 0; i--){
+            if (price[i] > max_price)
+                max_price = price[i]
+            profit[i] = Math.max(profit[i + 1],
+                                max_price - price[i]);
+        }
+        let min_price = price[0];
+        for(let i = 1; i < len; i++){
+            if (price[i] < min_price)
+                min_price = price[i];
+            profit[i] = Math.max(profit[i - 1],
+                    profit[i] + (price[i] - min_price));
+        }
+    
+    
+        return console.log(profit[len-1]);
+    };
+
+    maxProfit([1,2,1,2])
+    maxProfit([7,2,4,8,7])
+</script>
